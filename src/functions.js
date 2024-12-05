@@ -25,7 +25,8 @@ export function id() {
   return Date.now().toString(36) + Math.random().toString(36).substring(2)
 }
 
-export function generatePeriodSelectOptions(periodsInMinutes) {
+export function generatePeriodSelectOptions() {
+  const periodsInMinutes = [15, 30, 45, 60, 75]
   return periodsInMinutes.map((periodInMinutes) => ({
     value: periodInMinutes * SECONDS_IN_MINUTE,
     label: generatePeriodSelectOptionsLabel(periodInMinutes),

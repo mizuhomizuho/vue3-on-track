@@ -9,6 +9,7 @@ import { computed, provide, ref } from 'vue'
 import {
   generateActivities,
   generateActivitySelectOptions,
+  generatePeriodSelectOptions,
   generateTimelineItems,
   normalizePageHash,
 } from '@/functions.js'
@@ -43,8 +44,8 @@ function deleteActivity(activity) {
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
 
-function setTimelineItemActivity(timelineItem, activity) {
-  timelineItem.activityId = activity.id
+function setTimelineItemActivity(timelineItem, activityId) {
+  timelineItem.activityId = activityId
 }
 
 function updateTimelineItemActivitySeconds(timelineItem, activitySeconds) {
@@ -56,9 +57,10 @@ function setActivitySecondsToComplete(activity, secondsToComplete) {
 }
 
 provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds)
+provide('periodSelectOptions', generatePeriodSelectOptions())
+provide('setTimelineItemActivity', setTimelineItemActivity)
 provide('activitySelectOptions', activitySelectOptions.value)
 provide('timelineItems', timelineItems.value)
-provide('activities', activities.value)
 </script>
 
 <template>
@@ -68,7 +70,6 @@ provide('activities', activities.value)
       v-show="currentPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
       :current-page="currentPage"
-      @set-timeline-item-activity="setTimelineItemActivity"
       ref="timeline"
     />
     <TheProgress v-show="currentPage === PAGE_PROGRESS" />
