@@ -4,6 +4,7 @@ import { generatePeriodSelectOptions } from '@/functions.js'
 export const MILLISECONDS_IN_SECONDS = 1000
 export const SECONDS_IN_MINUTE = 60
 export const MINUTE_IN_HOVER = 60
+export const HOURS_IN_DAY = 24
 export const SECONDS_IN_HOVER = SECONDS_IN_MINUTE * MINUTE_IN_HOVER
 export const MIDNIGHT_HOUR = 0
 export const HOURS_ID_DAY = 24
