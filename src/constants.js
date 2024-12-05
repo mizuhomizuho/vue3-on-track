@@ -1,5 +1,6 @@
 import { ChartBarIcon, ClockIcon, ListBulletIcon } from '@heroicons/vue/24/outline'
 
+export const SECONDS_IN_HOVER = 3600
 export const MIDNIGHT_HOUR = 0
 export const HOURS_ID_DAY = 24
 

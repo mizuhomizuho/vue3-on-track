@@ -4,6 +4,6 @@ import { PAGE_PROGRESS } from '@/constants'
 
 <template>
   <a :href="`#${PAGE_PROGRESS}`">
-    <img src="../assets/logo.png" alt="Logo" class="h-8" />
+    <img src="../assets/img/logo.png" alt="Logo" class="h-8" />
   </a>
 </template>
