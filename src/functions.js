@@ -1,6 +1,6 @@
 import {
   HOURS_ID_DAY,
-  MIDNIGHT_HOUR,
+  MIDNIGHT_HOUR, MILLISECONDS_IN_SECONDS,
   MINUTE_IN_HOVER,
   PAGE_TIMELINE,
   SECONDS_IN_HOVER,
@@ -53,9 +53,17 @@ export function generateTimelineItems() {
     timelineItems.push({
       hour,
       activityId: null,
+      activitySeconds: 0,
     })
   }
   return timelineItems
+}
+
+export function formatSeconds(seconds) {
+  const date = new Date()
+  date.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECONDS)
+  const utc = date.toUTCString()
+  return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6)
 }
 
 export function generateActivitySelectOptions(activities) {

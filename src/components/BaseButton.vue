@@ -1,8 +1,16 @@
 <script>
-import { BUTTON_TYPE_DANGER, BUTTON_TYPE_NEUTRAL, BUTTON_TYPE_PRIMARY } from '@/constants.js'
+import {
+  BUTTON_TYPE_DANGER,
+  BUTTON_TYPE_NEUTRAL,
+  BUTTON_TYPE_PRIMARY,
+  BUTTON_TYPE_SUCCESS,
+  BUTTON_TYPE_WARNING,
+} from '@/constants.js'
 
 const typeClasses = {
   [BUTTON_TYPE_PRIMARY]: 'border-purple-500 p-3 enabled:hover:bg-purple-600 text-white',
+  [BUTTON_TYPE_SUCCESS]: 'border-green-500 p-3 enabled:hover:bg-green-600 text-white',
+  [BUTTON_TYPE_WARNING]: 'border-yellow-500 p-3 enabled:hover:bg-yellow-600 text-white',
   [BUTTON_TYPE_NEUTRAL]: 'border-zinc-400 p-3 enabled:hover:bg-zinc-700',
   [BUTTON_TYPE_DANGER]: 'border-red-500 p-3 enabled:hover:bg-red-600 text-white',
 }
