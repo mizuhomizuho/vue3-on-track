@@ -1,4 +1,11 @@
-import { HOURS_ID_DAY, MIDNIGHT_HOUR, PAGE_TIMELINE, SECONDS_IN_HOVER } from '@/constants'
+import {
+  HOURS_ID_DAY,
+  MIDNIGHT_HOUR,
+  MINUTE_IN_HOVER,
+  PAGE_TIMELINE,
+  SECONDS_IN_HOVER,
+  SECONDS_IN_MINUTE
+} from '@/constants'
 import { isNull, isPageValid } from '@/validators.js'
 
 export function normalizeSelectValue(value) {
@@ -16,6 +23,20 @@ export function normalizePageHash() {
 
 export function id() {
   return Date.now().toString(36) + Math.random().toString(36).substring(2)
+}
+
+export function generatePeriodSelectOptions(periodsInMinutes) {
+
+  return periodsInMinutes.map((periodInMinutes) => ({
+      value: periodInMinutes * SECONDS_IN_MINUTE,
+      label: generatePeriodSelectOptionsLabel(periodInMinutes),
+  }))
+}
+
+function generatePeriodSelectOptionsLabel(periodInMinutes) {
+  const hours = Math.floor(periodInMinutes / MINUTE_IN_HOVER).toString().padStart(2, 0)
+  const minutes = (periodInMinutes % MINUTE_IN_HOVER).toString().padStart(2, 0)
+  return `${hours}:${minutes}`
 }
 
 export function generateActivities() {

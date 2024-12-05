@@ -17,6 +17,11 @@ export function isButtonTypeValid(type) {
 }
 
 export function isActivityValid({ id, name, secondsToComplete }) {
+
+  if (isNull(id)) {
+    return true
+  }
+
   return [isNotEmptyString(id), isNotEmptyString(name), isNumber(secondsToComplete)].every(Boolean)
 }
 
@@ -34,6 +39,10 @@ export function validateTimelineItems(timelineItems) {
 
 export function isUndefinedOrNull(value) {
   return isUndefined(value) || isNull(value)
+}
+
+export function isNumber(value) {
+  return typeof value === 'number'
 }
 
 export function isNumberOrNull(value) {
@@ -70,8 +79,4 @@ function isBetween(value, start, end) {
 
 function isString(value) {
   return typeof value === 'string'
-}
-
-function isNumber(value) {
-  return typeof value === 'number'
 }
