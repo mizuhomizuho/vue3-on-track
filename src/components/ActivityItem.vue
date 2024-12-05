@@ -9,12 +9,12 @@ import { isActivityValid, isUndefined } from '@/validators.js'
 defineProps({
   activity: {
     required: true,
-    type: Array,
+    type: Object,
     validator: isActivityValid,
   },
 })
 
-const secondsToComplete = ref(null)
+const secondsToComplete = ref(0)
 
 const emit = defineEmits({
   delete: isUndefined,

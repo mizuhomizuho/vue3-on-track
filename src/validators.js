@@ -40,12 +40,20 @@ export function isNumberOrNull(value) {
   return isNumber(value) || isNull(value)
 }
 
+export function isSelectValueValid(value) {
+  return isNotEmptyString(value) || isNumberOrNull(value)
+}
+
 export function validateActivitySelectOptions(activitySelectOptions) {
   return activitySelectOptions.every(isSelectOptionValid)
 }
 
 export function isUndefined(value) {
   return value === undefined
+}
+
+export function isNull(value) {
+  return value === null
 }
 
 function isSelectOptionValid({ value, label }) {
@@ -66,8 +74,4 @@ function isString(value) {
 
 function isNumber(value) {
   return typeof value === 'number'
-}
-
-function isNull(value) {
-  return value === null
 }

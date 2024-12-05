@@ -3,16 +3,21 @@ import BaseButton from '@/components/BaseButton.vue'
 import { PlusIcon } from '@heroicons/vue/24/outline/index.js'
 import { isActivityValid } from '@/validators.js'
 import { nextTick, ref } from 'vue'
+import { id } from '@/functions.js'
 
 const emit = defineEmits({
   submit: isActivityValid,
 })
 
-const activity = ref('')
+const name = ref('')
 
 async function submit() {
-  emit('submit', activity.value)
-  activity.value = ''
+  emit('submit', {
+    id: id(),
+    name: name.value,
+    secondsToComplete: 0,
+  })
+  name.value = ''
   await nextTick()
   window.scrollTo(0, document.body.scrollHeight)
 }
@@ -22,11 +27,11 @@ async function submit() {
   <form @submit.prevent="submit" class="sticky flex bottom-[57px] gap-2 bg-zinc-800 p-4">
     <input
       type="text"
-      v-model="activity"
+      v-model="name"
       class="w-full rounded border px-4 text-xl text-black"
       placeholder="Activity name"
     />
-    <BaseButton :disabled="activity.trim() === ''">
+    <BaseButton :disabled="name.trim() === ''">
       <PlusIcon class="h-8" />
     </BaseButton>
   </form>
