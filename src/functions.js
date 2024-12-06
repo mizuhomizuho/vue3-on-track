@@ -1,4 +1,11 @@
-import { MILLISECONDS_IN_SECONDS, MINUTE_IN_HOVER, SECONDS_IN_MINUTE } from '@/constants'
+import {
+  HUNDRED_PERCENT,
+  LOW_PERCEWNT,
+  MEDIUM_PERCEWNT,
+  MILLISECONDS_IN_SECONDS,
+  MINUTE_IN_HOVER,
+  SECONDS_IN_MINUTE
+} from '@/constants'
 import { isNull } from '@/validators.js'
 
 export function normalizeSelectValue(value) {
@@ -21,12 +28,11 @@ export function generatePeriodSelectOptions() {
   }))
 }
 
-function generatePeriodSelectOptionsLabel(periodInMinutes) {
-  const hours = Math.floor(periodInMinutes / MINUTE_IN_HOVER)
-    .toString()
-    .padStart(2, 0)
-  const minutes = (periodInMinutes % MINUTE_IN_HOVER).toString().padStart(2, 0)
-  return `${hours}:${minutes}`
+export function getProgressColorClass(percentage) {
+  if (percentage < LOW_PERCEWNT) return 'bg-red-500'
+  if (percentage < MEDIUM_PERCEWNT) return 'bg-yellow-500'
+  if (percentage < HUNDRED_PERCENT) return 'bg-blue-500'
+  return 'bg-green-500'
 }
 
 export function formatSeconds(seconds) {
@@ -34,4 +40,12 @@ export function formatSeconds(seconds) {
   date.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECONDS)
   const utc = date.toUTCString()
   return utc.substring(utc.indexOf(':') - 2, utc.indexOf(':') + 6)
+}
+
+function generatePeriodSelectOptionsLabel(periodInMinutes) {
+  const hours = Math.floor(periodInMinutes / MINUTE_IN_HOVER)
+    .toString()
+    .padStart(2, 0)
+  const minutes = (periodInMinutes % MINUTE_IN_HOVER).toString().padStart(2, 0)
+  return `${hours}:${minutes}`
 }

@@ -1,6 +1,7 @@
 <script setup>
 import { isHourValid } from '@/validators.js'
 import { currentHour } from '@/functions.js'
+import { scrollToHour } from '@/timeline-items.js'
 
 const props = defineProps({
   hour: {
@@ -19,5 +20,5 @@ const formatedHour = `${props.hour.toString().padStart(2, 0)}:00`
 </script>
 
 <template>
-  <a href="#" :class="classes"> {{ formatedHour }} </a>
+  <a href="#" :class="classes" @click.prevent="scrollToHour(hour)"> {{ formatedHour }} </a>
 </template>

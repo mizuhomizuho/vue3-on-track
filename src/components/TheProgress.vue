@@ -1,11 +1,12 @@
 <script setup>
-
+import ProgressItem from '@/components/ProgressItem.vue'
+import { trackedActivities } from '@/activities.js'
 </script>
 
 <template>
-  <h1>progress</h1>
+  <ul class="divide-y">
+    <ProgressItem v-for="activity in trackedActivities" :key="activity.id" :activity="activity" />
+  </ul>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

@@ -28,6 +28,10 @@ export const SECONDS_IN_HOVER = SECONDS_IN_MINUTE * MINUTE_IN_HOVER
 export const MIDNIGHT_HOUR = 0
 export const HOURS_ID_DAY = 24
 
+export const LOW_PERCEWNT = 33
+export const MEDIUM_PERCEWNT = 66
+export const HUNDRED_PERCENT = 100
+
 export const BUTTON_TYPE_PRIMARY = 'primary'
 export const BUTTON_TYPE_SUCCESS = 'success'
 export const BUTTON_TYPE_WARNING = 'warning'
