@@ -8,8 +8,9 @@ import {
 import BaseButton from '@/components/BaseButton.vue'
 import { ArrowPathIcon, PauseIcon, PlayIcon } from '@heroicons/vue/24/outline/index.js'
 import { isTimelineItemValid } from '@/validators.js'
-import { formatSeconds } from '../functions.js'
+import { currentHour, formatSeconds } from '../functions.js'
 import { inject, ref } from 'vue'
+import { updateTimelineItemActivitySecondsKey } from '@/keys.js'
 
 const props = defineProps({
   timelineItem: {
@@ -19,10 +20,10 @@ const props = defineProps({
   },
 })
 
-const updateTimelineItemActivitySeconds = inject('updateTimelineItemActivitySeconds')
+const updateTimelineItemActivitySeconds = inject(updateTimelineItemActivitySecondsKey)
 const seconds = ref(props.timelineItem.activitySeconds)
 const isRunning = ref(false)
-const isStartButtonDisabled = props.timelineItem.hour === new Date().getHours()
+const isStartButtonDisabled = props.timelineItem.hour === currentHour()
 
 function start() {
   isRunning.value = setInterval(() => {

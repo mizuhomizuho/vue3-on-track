@@ -5,81 +5,48 @@ import TheTimeline from '@/components/TheTimeline.vue'
 import TheProgress from '@/components/TheProgress.vue'
 import TheActivities from '@/components/TheActivities.vue'
 import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from '@/constants'
-import { computed, provide, ref } from 'vue'
+import { provide, readonly } from 'vue'
+import { generatePeriodSelectOptions } from '@/functions.js'
+import { currentPage } from '@/router.js'
 import {
-  generateActivities,
-  generateActivitySelectOptions,
-  generatePeriodSelectOptions,
-  generateTimelineItems,
-  normalizePageHash,
-} from '@/functions.js'
+  activitySelectOptionsKey,
+  createActivityKey,
+  deleteActivityKey,
+  periodSelectOptionsKey,
+  setActivitySecondsToCompleteKey,
+  setTimelineItemActivityKey,
+  timelineItemsKey,
+  updateTimelineItemActivitySecondsKey,
+} from '@/keys.js'
+import {
+  activities,
+  activitySelectOptions,
+  createActivity,
+  deleteActivity,
+  setActivitySecondsToComplete,
+} from '@/activities.js'
+import { setTimelineItemActivity, timelineItems, updateTimelineItemActivitySeconds } from '@/timeline-items.js'
 
-const currentPage = ref(normalizePageHash())
-const activities = ref(generateActivities())
-const timelineItems = ref(generateTimelineItems(activities.value))
-const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value))
-const timeline = ref()
-
-function goTo(page) {
-  if (currentPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
-    timeline.value.scrollToHour()
-  }
-  if (page !== PAGE_TIMELINE) {
-    document.body.scrollIntoView()
-  }
-  currentPage.value = page
-}
-
-function createActivity(activity) {
-  activities.value.push(activity)
-}
-
-function deleteActivity(activity) {
-  timelineItems.value.forEach((timelineItem) => {
-    if (timelineItem.activityId === activity.id) {
-      timelineItem.activityId = null
-      timelineItem.activitySeconds = 0
-    }
-  })
-  activities.value.splice(activities.value.indexOf(activity), 1)
-}
-
-function setTimelineItemActivity(timelineItem, activityId) {
-  timelineItem.activityId = activityId
-}
-
-function updateTimelineItemActivitySeconds(timelineItem, activitySeconds) {
-  timelineItem.activitySeconds += activitySeconds
-}
-
-function setActivitySecondsToComplete(activity, secondsToComplete) {
-  activity.secondsToComplete = secondsToComplete
-}
-
-provide('updateTimelineItemActivitySeconds', updateTimelineItemActivitySeconds)
-provide('setActivitySecondsToComplete', setActivitySecondsToComplete)
-provide('createActivity', createActivity)
-provide('periodSelectOptions', generatePeriodSelectOptions())
-provide('setTimelineItemActivity', setTimelineItemActivity)
-provide('activitySelectOptions', activitySelectOptions.value)
-provide('timelineItems', timelineItems.value)
+provide(updateTimelineItemActivitySecondsKey, updateTimelineItemActivitySeconds)
+provide(setActivitySecondsToCompleteKey, setActivitySecondsToComplete)
+provide(createActivityKey, createActivity)
+provide(deleteActivityKey, deleteActivity)
+provide(setTimelineItemActivityKey, setTimelineItemActivity)
+provide(activitySelectOptionsKey, readonly(activitySelectOptions))
+provide(periodSelectOptionsKey, readonly(generatePeriodSelectOptions()))
+provide(timelineItemsKey, readonly(timelineItems))
 </script>
 
 <template>
-  <TheHeader @navigate="goTo($event)" />
+  <TheHeader />
   <main class="flex flex-grow flex-col p-3">
     <TheTimeline
       v-show="currentPage === PAGE_TIMELINE"
       :timeline-items="timelineItems"
-      :current-page="currentPage"
-      ref="timeline"
+      ref="timelineRef"
     />
     <TheProgress v-show="currentPage === PAGE_PROGRESS" />
-    <TheActivities
-      v-show="currentPage === PAGE_ACTIVITIES"
-      :activities="activities"
-      @delete-activity="deleteActivity"
-    />
+    <TheActivities v-show="currentPage === PAGE_ACTIVITIES" :activities="activities" />
   </main>
-  <TheNav :current-page="currentPage" @navigate="goTo($event)" />
+  <TheNav />
 </template>

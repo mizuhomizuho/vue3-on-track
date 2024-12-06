@@ -2,27 +2,21 @@ import {
   HOURS_IN_DAY,
   MILLISECONDS_IN_SECONDS,
   MINUTE_IN_HOVER,
-  PAGE_TIMELINE,
   SECONDS_IN_HOVER,
   SECONDS_IN_MINUTE,
 } from '@/constants'
-import { isNull, isPageValid } from '@/validators.js'
+import { isNull } from '@/validators.js'
 
 export function normalizeSelectValue(value) {
   return isNull(value) || isNaN(value) ? value : +value
 }
 
-export function normalizePageHash() {
-  const page = location.hash.slice(1)
-  if (isPageValid(page)) {
-    return page
-  }
-  location.hash = PAGE_TIMELINE
-  return PAGE_TIMELINE
-}
-
 export function id() {
   return Date.now().toString(36) + Math.random().toString(36).substring(2)
+}
+
+export function currentHour() {
+  return new Date().getHours()
 }
 
 export function generatePeriodSelectOptions() {
