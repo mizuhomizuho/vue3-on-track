@@ -1,4 +1,5 @@
 import { BUTTON_TYPES, HOURS_ID_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from '@/constants.js'
+import { ICONS } from '@/icons.js'
 
 export function isPageValid(page) {
   return NAV_ITEMS.some(navItem => navItem.page === page)
@@ -14,6 +15,10 @@ export function isTimelineItemValid({ hour }) {
 
 export function isHourValid(hour) {
   return isNumber(hour) && isBetween(hour, MIDNIGHT_HOUR, HOURS_ID_DAY - 1)
+}
+
+export function isIconValid(icon) {
+  return Object.keys(ICONS).includes(icon)
 }
 
 export function isButtonTypeValid(type) {
@@ -69,12 +74,12 @@ export function isNull(value) {
   return value === null
 }
 
-function isSelectOptionValid({ value, label }) {
-  return (isNumber(value) || isNotEmptyString(value)) && isNotEmptyString(label)
+export function isNotEmptyString(value) {
+  return isString(value) && value.length > 0
 }
 
-function isNotEmptyString(value) {
-  return isString(value) && value.length > 0
+function isSelectOptionValid({ value, label }) {
+  return (isNumber(value) || isNotEmptyString(value)) && isNotEmptyString(label)
 }
 
 function isBetween(value, start, end) {

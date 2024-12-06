@@ -11,6 +11,7 @@ import { currentHour, formatSeconds } from '../functions.js'
 import { ref, watch } from 'vue'
 import { updateTimelineItem } from '@/timeline-items.js'
 import BaseIcon from '@/components/BaseIcon.vue'
+import { ICON_ARROW_PATH, ICON_PAUSE, ICON_PLAY } from '@/icons.js'
 
 const props = defineProps({
   timelineItem: {
@@ -55,16 +56,16 @@ function reset() {
 <template>
   <div class="flex w-full gap-2">
     <BaseButton :type="BUTTON_TYPE_DANGER" :disabled="!seconds" @click="reset">
-      <BaseIcon class="h-8" name="ArrowPath" />
+      <BaseIcon :name="ICON_ARROW_PATH" />
     </BaseButton>
     <div class="flex flex-grow items-center rounded bg-zinc-500 px-2 font-mono text-3xl">
       {{ formatSeconds(seconds) }}
     </div>
     <BaseButton v-if="isRunning" :type="BUTTON_TYPE_WARNING" @click="stop">
-      <BaseIcon class="h-8" name="Pause" />
+      <BaseIcon :name="ICON_PAUSE" />
     </BaseButton>
     <BaseButton v-else :type="BUTTON_TYPE_SUCCESS" :disabled="isStartButtonDisabled" @click="start">
-      <BaseIcon class="h-8" name="Play" />
+      <BaseIcon :name="ICON_PLAY" />
     </BaseButton>
   </div>
 </template>
