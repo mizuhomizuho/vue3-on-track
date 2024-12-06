@@ -1,16 +1,19 @@
 import { ref } from 'vue'
-import { PAGE_TIMELINE } from '@/constants.js'
+import { PAGE_ACTIVITIES, PAGE_PROGRESS, PAGE_TIMELINE } from '@/constants.js'
 import { isPageValid } from '@/validators.js'
+import TheTimeline from '@/components/TheTimeline.vue'
+import TheActivities from '@/components/TheActivities.vue'
+import TheProgress from '@/components/TheProgress.vue'
 
-export const timelineRef = ref()
 export const currentPage = ref(normalizePageHash())
+export const routes = {
+  [PAGE_TIMELINE]: TheTimeline,
+  [PAGE_ACTIVITIES]: TheActivities,
+  [PAGE_PROGRESS]: TheProgress,
+}
 
 export function navigate(page) {
-  if (currentPage.value === PAGE_TIMELINE && page === PAGE_TIMELINE) {
-    timelineRef.value.scrollToHour()
-  } else if (page !== PAGE_TIMELINE) {
-    document.body.scrollIntoView()
-  }
+  document.body.scrollIntoView()
   currentPage.value = page
 }
 
