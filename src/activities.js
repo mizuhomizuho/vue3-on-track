@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue'
-import { generateActivities, generateActivitySelectOptions } from '@/functions.js'
-import { timelineItems } from '@/timeline-items.js'
+import { SECONDS_IN_HOVER } from '@/constants.js'
+import { id } from '@/functions.js'
 
 export const activities = ref(generateActivities())
 export const activitySelectOptions = computed(() => generateActivitySelectOptions(activities.value))
@@ -10,15 +10,24 @@ export function createActivity(activity) {
 }
 
 export function deleteActivity(activity) {
-  timelineItems.value.forEach((timelineItem) => {
-    if (timelineItem.activityId === activity.id) {
-      timelineItem.activityId = null
-      timelineItem.activitySeconds = 0
-    }
-  })
   activities.value.splice(activities.value.indexOf(activity), 1)
 }
 
 export function setActivitySecondsToComplete(activity, secondsToComplete) {
   activity.secondsToComplete = secondsToComplete || 0
+}
+
+function generateActivities() {
+  return ['Coding', 'Reading', 'Training'].map((name, hours) => ({
+    id: id(),
+    name,
+    secondsToComplete: hours * SECONDS_IN_HOVER,
+  }))
+}
+
+function generateActivitySelectOptions(activities) {
+  return activities.map((activities) => ({
+    value: activities.id,
+    label: activities.name,
+  }))
 }
