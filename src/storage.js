@@ -6,7 +6,7 @@ import { activities } from '@/activities.js'
 export function loadState() {
   const serializedState = localStorage.getItem(APP_NAME)
   const state =  serializedState ? JSON.parse(serializedState) : {}
-  timelineItems.value = isToday(new Date(state.date)) ? state.timelineItems : timelineItems.value
+  timelineItems.value = isToday(new Date(state.data)) ? state.timelineItems : timelineItems.value
   activities.value = state.activities || activities.value
 }
 
