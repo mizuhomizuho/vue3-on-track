@@ -35,6 +35,10 @@ export function getProgressColorClass(percentage) {
   return 'bg-green-500'
 }
 
+export function formatSecondsWithSing(seconds) {
+  return `${seconds >= 0 ? '+' : '-'}${formatSeconds(seconds)}`
+}
+
 export function formatSeconds(seconds) {
   const date = new Date()
   date.setTime(Math.abs(seconds) * MILLISECONDS_IN_SECONDS)

@@ -27,7 +27,10 @@ const props = defineProps({
   },
 })
 
-const classes = `${typeClasses[props.type]} rounded border disabled:cursor-not-allowed disabled:opacity-50`
+const classes = [
+  'rounded border disabled:cursor-not-allowed disabled:opacity-50',
+  typeClasses[props.type],
+]
 </script>
 <template>
   <button :class="classes">
