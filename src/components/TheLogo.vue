@@ -1,11 +1,6 @@
 <script setup>
 import { PAGE_PROGRESS, PAGE_TIMELINE } from '@/constants'
-import { currentPage, navigate } from '@/router.js'
-import { scrollToCurrentHour } from '@/timeline-items.js'
-
-function handleClick() {
-  currentPage.value === PAGE_TIMELINE ? scrollToCurrentHour(true) : navigate(PAGE_TIMELINE)
-}
+import { navigate } from '@/router.js'
 </script>
 
 <template>
