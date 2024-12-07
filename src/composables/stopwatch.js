@@ -4,7 +4,7 @@ import { MILLISECONDS_IN_SECONDS } from '@/constants.js'
 export function useStopwatch(initialSeconds) {
   const seconds = ref(initialSeconds)
   const isRunning = ref(false)
-  const temp = 120
+  const temp = 1
 
   function start() {
     // console.log(3331)
