@@ -20,7 +20,6 @@ const props = defineProps({
 const { seconds, isRunning, start, stop, reset } = useStopwatch(props.timelineItem.activitySeconds)
 
 onMounted(() => {
-  console.log(props.timelineItem.isActive, 3332)
   if (props.timelineItem.isActive) {
     start()
   }
@@ -39,7 +38,6 @@ watchEffect(() =>
 )
 
 watch(isRunning, () => {
-  console.log(Boolean(isRunning.value), 3331)
   return updateTimelineItem(props.timelineItem, {
     isActive: Boolean(isRunning.value),
   })
