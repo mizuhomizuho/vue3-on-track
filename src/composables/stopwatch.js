@@ -7,7 +7,11 @@ export function useStopwatch(initialSeconds) {
   const temp = 120
 
   function start() {
-    isRunning.value = setInterval(() => (seconds.value += temp), MILLISECONDS_IN_SECONDS)
+    // console.log(3331)
+    isRunning.value = setInterval(() => {
+      // console.log(333)
+      seconds.value += temp
+    }, MILLISECONDS_IN_SECONDS)
   }
 
   function stop() {

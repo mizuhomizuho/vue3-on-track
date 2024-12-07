@@ -8,7 +8,7 @@ import { currentPage, routes } from '@/router.js'
 
 <template>
   <TheHeader />
-  <main class="flex flex-grow flex-col p-3">
+  <main class="flex flex-grow flex-col">
     <KeepAlive>
       <component :is="routes[currentPage]" />
     </KeepAlive>

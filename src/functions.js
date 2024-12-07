@@ -3,7 +3,7 @@ import {
   LOW_PERCEWNT,
   MEDIUM_PERCEWNT,
   MILLISECONDS_IN_SECONDS,
-  MINUTE_IN_HOUR,
+  MINUTES_IN_HOUR,
   SECONDS_IN_MINUTE
 } from '@/constants'
 import { isNull } from '@/validators.js'
@@ -47,9 +47,9 @@ export function formatSeconds(seconds) {
 }
 
 function generatePeriodSelectOptionsLabel(periodInMinutes) {
-  const hours = Math.floor(periodInMinutes / MINUTE_IN_HOUR)
+  const hours = Math.floor(periodInMinutes / MINUTES_IN_HOUR)
     .toString()
     .padStart(2, 0)
-  const minutes = (periodInMinutes % MINUTE_IN_HOUR).toString().padStart(2, 0)
+  const minutes = (periodInMinutes % MINUTES_IN_HOUR).toString().padStart(2, 0)
   return `${hours}:${minutes}`
 }

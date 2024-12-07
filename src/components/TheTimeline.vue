@@ -18,7 +18,7 @@ onActivated(scrollToCurrentHour)
 </script>
 
 <template>
-  <div class="mt-7">
+  <div class="mt-7 relative">
     <TheTimelineIndicator />
     <ul>
       <TimelineItem
