@@ -33,6 +33,10 @@ export function calculateCompletionPercentage(totalTrackedSeconds) {
   return Math.floor((totalTrackedSeconds * HUNDRED_PERCENT) / totalActivitySecondsToComplete.value)
 }
 
+export function initializeActivities(state) {
+  activities.value = state.activities || []
+}
+
 function generateActivitySelectOptions(activities) {
   return activities.map((activities) => ({
     value: activities.id,
