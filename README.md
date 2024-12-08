@@ -1,5 +1,11 @@
 # VUE3 ON TRACK
 
+## Technologies used:
+
+- VueJS 3.5
+- Tailwindcss 3.4
+- Heroicons 2.2
+
 ## Project Setup
 
 ```sh
