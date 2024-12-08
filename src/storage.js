@@ -29,5 +29,5 @@ function saveState() {
 }
 
 function loadFromLocalStorage() {
-  return JSON.parse(localStorage.getItem(APP_NAME) ?? {})
+  return JSON.parse(localStorage.getItem(APP_NAME) ?? '{}')
 }
