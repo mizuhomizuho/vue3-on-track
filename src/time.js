@@ -3,8 +3,12 @@ import {
   HUNDRED_PERCENT,
   MILLISECONDS_IN_SECONDS,
   SECONDS_IN_DAY,
-  SECONDS_IN_MINUTE,
+  SECONDS_IN_HOUR,
 } from '@/constants.js'
+
+const midnight = computed(() => new Date(now.value).setHours(0, 0, 0, 0))
+const secondsSinceMidnight = computed(() => (now.value - midnight.value) / MILLISECONDS_IN_SECONDS)
+let currentDateTimer = null
 
 export function today() {
   const today = new Date()
@@ -22,25 +26,30 @@ export function isToday(date) {
   return date.toDateString() === today().toDateString()
 }
 
+export function toSeconds(millisecond) {
+  return Math.round(millisecond / MILLISECONDS_IN_SECONDS)
+}
+
 export const now = ref(today())
 
 export const secondsSinceMidnightInPercentage = computed(() => {
   return (HUNDRED_PERCENT * secondsSinceMidnight.value) / SECONDS_IN_DAY
 })
 
-const midnight = computed(() => new Date(now.value).setHours(0, 0, 0, 0))
-
-const secondsSinceMidnight = computed(() => (now.value - midnight.value) / MILLISECONDS_IN_SECONDS)
-
-let timer = null
-
-export function startTimer() {
+export function startCurrentDateTimer() {
   now.value = today()
-  timer = setInterval(() => {
-    now.value = new Date(now.value.getTime() + SECONDS_IN_MINUTE * MILLISECONDS_IN_SECONDS)
+  currentDateTimer = setInterval(() => {
+    now.value = new Date(now.value.getTime() + MILLISECONDS_IN_SECONDS)
   }, MILLISECONDS_IN_SECONDS)
 }
 
-export function stopTimer() {
-  clearInterval(timer)
+export function stopCurrentDateTimer() {
+  clearInterval(currentDateTimer)
+}
+
+export function endOfIdleHour(date) {
+  const endOfHour = new Date(date)
+  endOfHour.setTime(endOfHour.setTime() + SECONDS_IN_HOUR * MILLISECONDS_IN_SECONDS)
+  endOfHour.setMinutes(0, 0, 0)
+  return endOfHour
 }

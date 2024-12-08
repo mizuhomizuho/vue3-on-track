@@ -1,14 +1,9 @@
 <script setup>
 import TimelineItem from '@/components/TimelineItem.vue'
 import { onActivated, onDeactivated } from 'vue'
-import {
-  scrollToCurrentHour,
-  stopTimelineItemTimer,
-  timelineItemRefs,
-  timelineItems,
-} from '@/timeline-items.js'
+import { scrollToCurrentHour, timelineItemRefs, timelineItems } from '@/timeline-items.js'
 import TheTimelineIndicator from '@/components/TheTimelineIndicator.vue'
-import { startTimer, stopTimer } from '@/time.js'
+import { startCurrentDateTimer, stopCurrentDateTimer } from '@/time.js'
 
 // watchPostEffect(async () => {
 //   if (currentPage.value === PAGE_TIMELINE) {
@@ -20,13 +15,11 @@ import { startTimer, stopTimer } from '@/time.js'
 //   }
 // })
 
-stopTimelineItemTimer()
-
 onActivated(() => {
   scrollToCurrentHour()
-  startTimer()
+  startCurrentDateTimer()
 })
-onDeactivated(stopTimer)
+onDeactivated(stopCurrentDateTimer)
 </script>
 
 <template>
