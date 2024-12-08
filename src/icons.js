@@ -7,7 +7,7 @@ import {
   PlayIcon as Play,
   PlusIcon as Plus,
   TrashIcon as Trash,
-  XMarkIcon as XMark
+  XMarkIcon as XMark,
 } from '@heroicons/vue/24/outline/index.js'
 import { CheckCircleIcon as CheckCircle } from '@heroicons/vue/24/solid/index.js'
 

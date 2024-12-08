@@ -4,7 +4,7 @@ import {
   MEDIUM_PERCEWNT,
   MILLISECONDS_IN_SECONDS,
   MINUTES_IN_HOUR,
-  SECONDS_IN_MINUTE
+  SECONDS_IN_MINUTE,
 } from '@/constants'
 import { isNull } from '@/validators.js'
 

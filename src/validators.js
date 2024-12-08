@@ -2,7 +2,7 @@ import { BUTTON_TYPES, HOURS_ID_DAY, MIDNIGHT_HOUR, NAV_ITEMS } from '@/constant
 import { ICONS } from '@/icons.js'
 
 export function isPageValid(page) {
-  return NAV_ITEMS.some(navItem => navItem.page === page)
+  return NAV_ITEMS.some((navItem) => navItem.page === page)
 }
 
 export function isNavItemValid(navItem) {
@@ -26,7 +26,6 @@ export function isButtonTypeValid(type) {
 }
 
 export function isActivityValid({ id, name, secondsToComplete }) {
-
   if (isNull(id)) {
     return true
   }
