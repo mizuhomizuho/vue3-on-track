@@ -34,40 +34,16 @@ export function isActivityValid({ id, name, secondsToComplete }) {
   return [isNotEmptyString(id), isNotEmptyString(name), isNumber(secondsToComplete)].every(Boolean)
 }
 
-export function validateActivities(activities) {
-  return activities.every(isActivityValid)
-}
-
 export function validateSelectOptions(options) {
   return options.every(isSelectOptionValid)
-}
-
-export function validateTimelineItems(timelineItems) {
-  return timelineItems.every(isTimelineItemValid)
 }
 
 export function isUndefinedOrNull(value) {
   return isUndefined(value) || isNull(value)
 }
 
-export function isNumber(value) {
-  return typeof value === 'number'
-}
-
-export function isNumberOrNull(value) {
-  return isNumber(value) || isNull(value)
-}
-
 export function isSelectValueValid(value) {
   return isNotEmptyString(value) || isNumberOrNull(value)
-}
-
-export function validateActivitySelectOptions(activitySelectOptions) {
-  return activitySelectOptions.every(isSelectOptionValid)
-}
-
-export function isUndefined(value) {
-  return value === undefined
 }
 
 export function isNull(value) {
@@ -88,4 +64,16 @@ function isBetween(value, start, end) {
 
 function isString(value) {
   return typeof value === 'string'
+}
+
+function isUndefined(value) {
+  return value === undefined
+}
+
+function isNumberOrNull(value) {
+  return isNumber(value) || isNull(value)
+}
+
+function isNumber(value) {
+  return typeof value === 'number'
 }

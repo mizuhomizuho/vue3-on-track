@@ -1,6 +1,6 @@
 import { computed, ref } from 'vue'
 import { MIDNIGHT_HOUR } from '@/constants.js'
-import { endOfIdleHour, isToday, now, today, toSeconds } from '@/time.js'
+import { endOfIdleHour, isToday, today, toSeconds } from '@/time.js'
 
 export const timelineItemRefs = ref([])
 
@@ -25,7 +25,7 @@ export function resetTimelineItemActivities(timelineItems, activity) {
     updateTimelineItem(timelineItem, {
       activityId: null,
       activitySeconds:
-        timelineItems.hour === now.value.getHours() ? timelineItems.activitySeconds : 0,
+        timelineItems.hour === today().getHours() ? timelineItems.activitySeconds : 0,
     }),
   )
 }
@@ -44,7 +44,7 @@ export function scrollToCurrentHour(isSmooth = false) {
   if ('scrollRestoration' in history) {
     history.scrollRestoration = 'manual'
   }
-  scrollToHour(now.value.getHours(), isSmooth)
+  scrollToHour(today().getHours(), isSmooth)
 }
 
 export function scrollToHour(hour, isSmooth = true) {
@@ -73,7 +73,7 @@ function resetTimelineItems() {
     updateTimelineItem(timelineItem, {
       activitySeconds: 0,
       isActive: false,
-    })
+    }),
   )
 }
 
