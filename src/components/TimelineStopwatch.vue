@@ -9,8 +9,9 @@ import { now } from '@/time.js'
 import {
   resetTimelineItemTimer,
   startTimelineItemTimer,
-  stopTimelineItemTimer, timelineItemTimer
+  stopTimelineItemTimer,
 } from '@/timeline-item-timer.js'
+import { activeTimelineItem } from '@/timeline-items.js'
 
 defineProps({
   timelineItem: {
@@ -34,9 +35,9 @@ defineProps({
       {{ formatSeconds(timelineItem.activitySeconds) }}
     </div>
     <BaseButton
-      v-if="timelineItemTimer && timelineItem.hour === now.getHours()"
+      v-if="timelineItem === activeTimelineItem"
       :type="BUTTON_TYPE_WARNING"
-      @click="stopTimelineItemTimer(timelineItem)"
+      @click="stopTimelineItemTimer"
     >
       <BaseIcon :name="ICON_PAUSE" />
     </BaseButton>
